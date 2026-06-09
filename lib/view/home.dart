@@ -3,6 +3,7 @@ import 'package:recipe_app_using_api/model/model.dart';
 import 'package:recipe_app_using_api/service/service.dart';
 import 'package:recipe_app_using_api/theme/appcolors.dart';
 import 'package:recipe_app_using_api/view/details.dart';
+import 'package:recipe_app_using_api/view/drawer.dart';
 import 'package:recipe_app_using_api/view/profile.dart';
 
 class Myhome extends StatefulWidget {
@@ -13,6 +14,21 @@ class Myhome extends StatefulWidget {
 }
 
 class _MyhomeState extends State<Myhome> {
+  final ScrollController _scrollController = ScrollController();
+
+  final GlobalKey recipesKey = GlobalKey();
+  void scrollToSection(GlobalKey key) {
+    final context = key.currentContext;
+
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   List<RecipeModel> recipes = [];
   final ApiService api = ApiService();
   bool isLoading = true;
@@ -34,7 +50,14 @@ class _MyhomeState extends State<Myhome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.textDark,
+      drawer: MyDrawer(
+        onRecipesTap: () {
+          Navigator.pop(context);
+
+          scrollToSection(recipesKey);
+        },
+      ),
+      backgroundColor: AppColors.accentGold,
 
       body: isLoading
           ? const Center(
@@ -51,13 +74,20 @@ class _MyhomeState extends State<Myhome> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                       children: [
-                        Icon(Icons.menu, color: Colors.white),
-
+                        Builder(
+                          builder: (context) {
+                            return IconButton(
+                              onPressed: () {
+                                Scaffold.of(context).openDrawer();
+                              },
+                              icon: const Icon(Icons.menu, color: Colors.white),
+                            );
+                          },
+                        ),
                         Text(
                           "Recipe Oasis",
 
                           style: TextStyle(
-                            color: Colors.white,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
@@ -335,6 +365,7 @@ class _MyhomeState extends State<Myhome> {
                           ),
                           SizedBox(height: 20),
                           Text(
+                            key: recipesKey,
                             "Recipes",
 
                             style: TextStyle(
