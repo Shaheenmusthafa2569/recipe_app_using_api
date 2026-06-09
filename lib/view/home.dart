@@ -3,6 +3,7 @@ import 'package:recipe_app_using_api/model/model.dart';
 import 'package:recipe_app_using_api/service/service.dart';
 import 'package:recipe_app_using_api/theme/appcolors.dart';
 import 'package:recipe_app_using_api/view/details.dart';
+import 'package:recipe_app_using_api/view/profile.dart';
 
 class Myhome extends StatefulWidget {
   const Myhome({super.key});
@@ -62,10 +63,23 @@ class _MyhomeState extends State<Myhome> {
                           ),
                         ),
 
-                        CircleAvatar(
-                          backgroundColor: Colors.white,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Myprofilepage(),
+                              ),
+                            );
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
 
-                          child: Icon(Icons.person, color: AppColors.textDark),
+                            child: Icon(
+                              Icons.person,
+                              color: AppColors.textDark,
+                            ),
+                          ),
                         ),
                       ],
                     ),
