@@ -36,7 +36,9 @@ class _MyhomeState extends State<Myhome> {
       backgroundColor: AppColors.textDark,
 
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: CircularProgressIndicator(color: AppColors.accentGold),
+            )
           : SafeArea(
               child: Column(
                 children: [
@@ -335,24 +337,25 @@ class _MyhomeState extends State<Myhome> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            MyRecipeDetails(recipe: recipes[index]),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MyRecipeDetails(
+                                        recipe: recipes[index],
                                       ),
-                                    );
-                                  },
+                                    ),
+                                  );
+                                },
                                 child: Container(
                                   margin: EdgeInsets.only(bottom: 15),
-                                
+
                                   padding: EdgeInsets.all(10),
-                                
+
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                
+
                                     borderRadius: BorderRadius.circular(20),
-                                
+
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withOpacity(.05),
@@ -366,20 +369,22 @@ class _MyhomeState extends State<Myhome> {
                                       Container(
                                         height: 100,
                                         width: 100,
-                                
+
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
-                                
+                                          borderRadius: BorderRadius.circular(
+                                            15,
+                                          ),
+
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                
+
                                             image: NetworkImage(
                                               recipes[index].image,
                                             ),
                                           ),
                                         ),
                                       ),
-                                
+
                                       SizedBox(width: 15),
                                       Expanded(
                                         child: Column(
@@ -390,7 +395,7 @@ class _MyhomeState extends State<Myhome> {
                                                 horizontal: 10,
                                                 vertical: 5,
                                               ),
-                                
+
                                               decoration: BoxDecoration(
                                                 color: AppColors.accentGold
                                                     .withOpacity(0.22),
@@ -404,10 +409,10 @@ class _MyhomeState extends State<Myhome> {
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                               ),
-                                
+
                                               child: Text(
                                                 recipes[index].difficulty,
-                                
+
                                                 style: TextStyle(
                                                   color: AppColors.accentGold,
                                                   fontWeight: FontWeight.bold,
@@ -416,11 +421,11 @@ class _MyhomeState extends State<Myhome> {
                                             ),
                                             Text(
                                               recipes[index].name,
-                                
+
                                               maxLines: 2,
-                                
+
                                               overflow: TextOverflow.ellipsis,
-                                
+
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
@@ -428,10 +433,10 @@ class _MyhomeState extends State<Myhome> {
                                               ),
                                             ),
                                             SizedBox(height: 10),
-                                
+
                                             Text(
                                               recipes[index].cuisine,
-                                
+
                                               style: TextStyle(
                                                 color: Colors.grey,
                                               ),
@@ -439,9 +444,9 @@ class _MyhomeState extends State<Myhome> {
                                           ],
                                         ),
                                       ),
-                                
+
                                       SizedBox(height: 5),
-                                
+
                                       Column(
                                         children: [
                                           Text(
